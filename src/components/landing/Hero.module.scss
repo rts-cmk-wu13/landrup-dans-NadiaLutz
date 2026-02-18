@@ -1,0 +1,46 @@
+@use "../../styles/_tokens.scss" as *;
+
+
+.intro {
+  min-height: 100vh;
+  background: url("/imgs/heroimg.jpg") center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  .introBrand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 2rem 6rem;
+
+
+    .brand {
+  width: 3rem;
+}
+
+.brandName {
+  width: 12rem;
+}
+  }
+
+  .heroButton {
+    background-color: $color-btn-light;
+    color: $color-text;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+
+    &:hover {
+      background-color: $color-btn;
+      color: $color-bg-light;
+    }
+  }
+
+ }
+
+
+
