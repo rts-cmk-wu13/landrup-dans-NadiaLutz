@@ -2,7 +2,7 @@
 
 
 .intro {
-  min-height: 100vh;
+  min-height: 75vh;
   background: url("/imgs/heroimg.jpg") center / cover no-repeat;
   display: flex;
   flex-direction: column;
@@ -25,19 +25,28 @@
 .brandName {
   width: 12rem;
 }
+
+.heroDivider {
+  position: absolute;
+  top: 20%;
+  left: 0;  
+  width: 83%;
+  height: 2px;
+  background-color: $color-text-light;
   }
+
+}
 
   .heroButton {
     background-color: $color-btn-light;
     color: $color-text;
     border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-
-    &:hover {
-      background-color: $color-btn;
-      color: $color-bg-light;
-    }
+    border-radius: 0.5rem;
+    padding: 0.75rem 3rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    box-shadow: 0 4px 1px rgba(0, 0, 0, 0.226);
+    margin-block-end: 4.25rem;
   }
 
  }

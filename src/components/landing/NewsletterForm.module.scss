@@ -1,0 +1,47 @@
+@use "../../styles/_tokens.scss" as *;
+
+
+.newsletterForm {
+  font-family: "Ubuntu", sans-serif;
+  background: $color-bg;
+  color: $color-text-light;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem 2rem;
+
+  .newsletterTitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .newsletterText {
+    font-size: 0.9rem;
+    max-width: 400px;
+    line-height: 1.4;
+  }
+
+  .newsletterFormContainer {
+    display: flex;
+    gap: .5rem;
+    margin-inline: auto;
+
+    .newsletterInput {
+      padding: .75rem;
+      border-radius: .2rem;
+      border: none;
+    }
+
+    .newsletterButton {
+      background-color: $color-btn-light;
+      color: $color-text;
+      border: none;
+      border-radius: .5rem;
+      padding: .75rem 1.5rem;
+      font-size: .75rem;
+      box-shadow: 0 4px 1px rgba(0, 0, 0, 0.226);
+    }
+   }
+
+}

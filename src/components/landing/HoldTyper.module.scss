@@ -1,0 +1,44 @@
+@use "../../styles/_tokens.scss" as *;
+
+
+.holdTyper {
+  font-family: "Ubuntu", sans-serif;
+  background: $color-bg;
+  color: $color-text-light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem 1rem 1rem;
+
+  .holdTypeTitle {
+    font-size: 1.5rem;
+  }
+
+  .holdType {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: .2rem;
+    max-width: 500px;
+    text-align: left;
+
+    .holdTypeSubtitle {
+      font-size: 1.25rem;
+        font-weight: 400;
+    }
+
+    .holdTypeImg {
+      width: 100%;
+      height: auto;
+      border-radius: 0.1rem;
+      object-fit: cover;
+    }
+
+    .holdTypeText {
+      font-size: 0.9rem;
+        line-height: 1.4;
+    }
+   }
+
+}
