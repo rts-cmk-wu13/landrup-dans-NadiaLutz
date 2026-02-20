@@ -1,3 +1,10 @@
+import Footer from "./components/Footer"
+
 export default function AppLayout({ children }) {
-  return <div>{children}</div>
+  return (
+    <>
+      {children}
+      <Footer />
+    </>
+  )
 }
