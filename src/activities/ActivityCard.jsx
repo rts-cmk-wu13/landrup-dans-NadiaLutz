@@ -1,19 +1,14 @@
-// src/activities/ActivityCard.jsx
+
 import Link from "next/link";
 import { formatWeekday } from "@/lib/weekday";
+import styles from "./ActivityCard.module.scss";
 
 function getInstructorName(activity) {
   const i = activity?.instructor;
   const first = i?.firstname || i?.firstName || activity?.instructorFirstname;
   const last = i?.lastname || i?.lastName || activity?.instructorLastname;
   const full = [first, last].filter(Boolean).join(" ").trim();
-  return (
-    full ||
-    activity?.instructorName ||
-    activity?.instructor ||
-    activity?.teacher ||
-    ""
-  );
+  return full || activity?.instructorName || activity?.instructor || activity?.teacher || "";
 }
 
 export default function ActivityCard({ activity }) {
@@ -24,13 +19,18 @@ export default function ActivityCard({ activity }) {
   const instructor = getInstructorName(activity);
 
   return (
-    <Link href={`/activities/${encodeURIComponent(id)}`} style={{ textDecoration: "none" }}>
-      <article>
-        <h2>{name}</h2>
-        <p>
-          {weekday}{weekday && time ? " · " : ""}{time}
-        </p>
-        {instructor ? <p>{instructor}</p> : null}
+    <Link href={`/activities/${encodeURIComponent(id)}`} className={styles.link}>
+      <article className={styles.card}>
+        {activity?.Asset?.url && (
+          <img src={activity.Asset.url} alt={name} className={styles.image} />
+        )}
+        <div className={styles.info}>
+          <h2 className={styles.name}>{name}</h2>
+          <p className={styles.meta}>
+            {weekday}{weekday && time ? " · " : ""}{time}
+          </p>
+          {instructor ? <p className={styles.instructor}>{instructor}</p> : null}
+        </div>
       </article>
     </Link>
   );

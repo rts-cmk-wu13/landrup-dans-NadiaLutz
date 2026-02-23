@@ -1,40 +1,58 @@
-
 import Link from "next/link";
-import { formatWeekday } from "@/lib/weekday";
+import styles from "./ProfileActivities.module.scss";
 
 function activityKey(a, i) {
   return a?.id ?? `${a?.name || "activity"}-${i}`;
 }
 
+function AgeRange({ minAge, maxAge }) {
+  if (minAge && maxAge) return <>{minAge}–{maxAge} år</>;
+  if (minAge) return <>Fra {minAge} år</>;
+  if (maxAge) return <>Op til {maxAge} år</>;
+  return null;
+}
+
 export default function ProfileActivities({ title, activities = [], variant }) {
   return (
-    <section style={{ marginTop: "1rem" }}>
-      <h2 style={{ marginBottom: ".5rem" }}>{title}</h2>
+    <section className={styles.section}>
+      <h2 className={styles.title}>{title}</h2>
 
-      {activities.length === 0 ? <p>No activities.</p> : null}
+      {activities.length === 0 && <p>Ingen aktiviteter tilgængelige.</p>}
 
-      {activities.length > 0 ? (
-        <div style={{ display: "grid", gap: ".75rem" }}>
+      {activities.length > 0 && (
+        <div className={styles.container}>
           {activities.map((a, i) => (
-            <article key={activityKey(a, i)}>
-              <h3 style={{ margin: 0 }}>{a?.name || "Activity"}</h3>
-              <p style={{ margin: 0 }}>
-                {formatWeekday(a?.weekday)}{a?.time ? ` · ${a.time}` : ""}
-              </p>
+            <article key={activityKey(a, i)} className={styles.card}>
+              {a?.Asset?.url && (
+                <img
+                  src={a.Asset.url}
+                  alt={a?.name || "Activity"}
+                  className={styles.image}
+                />
+              )}
+              <div className={styles.info}>
+                <h3 className={styles.name}>{a?.name || "Activity"}</h3>
+                {(a?.minAge || a?.maxAge) && (
+                  <p className={styles.meta}>
+                    <AgeRange minAge={a?.minAge} maxAge={a?.maxAge} />
+                  </p>
+                )}
+              </div>
 
-              {variant === "default" ? (
-                <Link href={`/activities/${encodeURIComponent(a?.id)}`}>View class</Link>
-              ) : null}
-
-              {variant === "instructor" ? (
-                <Link href={`/activities/${encodeURIComponent(a?.id)}/participants`}>
+              {variant === "default" && (
+                <Link href={a?.id ? `/activities/${encodeURIComponent(a.id)}` : "#"} className={styles.link}>
+                  View class
+                </Link>
+              )}
+              {variant === "instructor" && (
+                <Link href={a?.id ? `/activities/${encodeURIComponent(a.id)}/participants` : "#"} className={styles.link}>
                   Participant list
                 </Link>
-              ) : null}
+              )}
             </article>
           ))}
         </div>
-      ) : null}
+      )}
     </section>
   );
 }

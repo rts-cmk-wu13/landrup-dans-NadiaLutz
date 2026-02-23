@@ -4,23 +4,18 @@
   font-family: "Ubuntu", sans-serif;
   background: $color-bg;
   color: $color-text-light;
-  padding: 0 1rem 2rem;
+  padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-}
-
-.header {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .title {
   font-size: 1.5rem;
   font-weight: 400;
   margin: 0;
+  text-align: center;
 }
 
 .controls {
@@ -29,13 +24,16 @@
 }
 
 .controlBtn {
-  border: none;
-  border-radius: 0.6rem;
-  background: $color-btn-light;
-  color: $color-text;
-  padding: 0.5rem 0.75rem;
-  line-height: 1;
+  border: 2px solid $color-btn-light;
+  background: $color-bg;
+  font-size: 2rem;
+  border-radius: 50%;
+  background: $color-btn;
+  color: $color-text-light;
+  padding: 0.25rem;
+  line-height: 0.91;
   box-shadow: 0 4px 1px rgba(0, 0, 0, 0.226);
+  cursor: pointer;
 }
 
 .controlBtn:disabled {
@@ -45,40 +43,39 @@
 .stateText {
   font-size: 0.9rem;
   opacity: 0.95;
+  text-align: center;
 }
 
 .track {
   display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 0.5rem;
-  scrollbar-width: none;
-}
-
-.track::-webkit-scrollbar {
-  display: none;
+  width: 100%;
+  overflow: hidden;
 }
 
 .card {
-  flex: 0 0 85%;
-  max-width: 22rem;
-  scroll-snap-align: center;
-  background: $color-bg-light;
-  color: $color-text;
-  border-radius: 0.9rem;
-  padding: 1rem;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  flex: 0 0 100%;
+  width: 100%;
+  background: transparent;
+  color: $color-text-light;
+  text-align: center;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
 }
 
 .text {
-  margin: 0 0 0.75rem;
-  line-height: 1.4;
+  margin: 0 0 1.25rem;
+  line-height: 1.6;
   font-size: 0.95rem;
 }
 
 .name {
   margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.85;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.occupation {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.75;
 }

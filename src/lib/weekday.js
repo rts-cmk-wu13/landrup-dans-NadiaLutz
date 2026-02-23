@@ -1,12 +1,12 @@
 
 const MAP = {
-  mandag: "Monday",
-  tirsdag: "Tuesday",
-  onsdag: "Wednesday",
-  torsdag: "Thursday",
-  fredag: "Friday",
-  lørdag: "Saturday",
-  søndag: "Sunday",
+  mandag: "Mandag",
+  tirsdag: "Tirsdag",
+  onsdag: "Onsdag",
+  torsdag: "Torsdag",
+  fredag: "Fredag",
+  lørdag: "Lørdag",
+  søndag: "Søndag",
 };
 
 export function formatWeekday(value) {
