@@ -1,5 +1,7 @@
+
 import styles from "./login.module.scss"
 import Link from "next/link"
+import LoginForm from "@/forms/LoginForm"
 
 export default function LoginPage() {
   return (
@@ -15,15 +17,12 @@ export default function LoginPage() {
       </article>
 
       <article className={styles.loginFormContainer}>
-            <h1 className={styles.loginTitle}>Log ind</h1>
-        <form className={styles.loginForm}>
-          <input type="text" id="username" name="username" required />
-          <input type="password" id="password" name="password" required />
-          <button type="submit">Log ind</button>
-        </form>
+        <h1 className={styles.loginTitle}>Log in</h1>
+
+        <LoginForm className={styles.loginForm} />
 
         <span className={styles.registerLink}>
-          Er du endnu ikke bruger? <Link href="/register">Opret dig her</Link>
+          Don’t have an account? <Link href="/register">Create one here</Link>
         </span>
       </article>
     </section>

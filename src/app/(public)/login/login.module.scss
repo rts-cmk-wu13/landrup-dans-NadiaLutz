@@ -9,32 +9,6 @@
   background: $color-bg;
 }
 
-  .introBrand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    margin-block: 2rem 6rem;
-
-
-    .brand {
-  width: 3rem;
-}
-
-.brandName {
-  width: 14rem;
-}
-
-.heroDivider {
-  position: absolute;
-  top: 21%;
-  left: 0;  
-  width: 83%;
-  height: 3px;
-  background-color: $color-text-light;
-  }
-
-}
 
 .loginFormContainer {
   width: calc(100% - 2.5rem);

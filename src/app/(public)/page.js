@@ -1,5 +1,4 @@
 import styles from "./landing.module.scss"
-
 import Hero from "@/components/landing/Hero"
 import HoldTyper from "@/components/landing/HoldTyper"
 import Carousel from "@/components/landing/Carousel"

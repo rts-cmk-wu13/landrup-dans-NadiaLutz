@@ -1,3 +1,10 @@
+import Footer from "@/components/Footer"
+
 export default function PublicLayout({ children }) {
-  return <>{children}</>
+  return (
+    <>
+      {children}
+      <Footer />
+    </>
+  )
 }

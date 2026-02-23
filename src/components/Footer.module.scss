@@ -1,0 +1,40 @@
+@use "../styles/_tokens.scss" as *;
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-bg;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.nav li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: $color-text-light;
+  text-decoration: none;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.nav li a:hover,
+.nav li a.active {
+  opacity: 1;
+}
+
+.icon {
+  font-size: 1.4rem;
+}
