@@ -5,7 +5,6 @@ import { useParams } from "next/navigation"
 import { ldFetch } from "@/lib/api"
 import { getMe } from "@/lib/auth"
 import { canJoinActivity, isUserJoinedActivity } from "@/lib/rules"
-import { formatWeekday } from "@/lib/weekday"
 import styles from "./activityDetail.module.scss"
 
 export default function ActivityDetailsPage() {
@@ -68,26 +67,15 @@ export default function ActivityDetailsPage() {
 
   if (!activity) return <main className={styles.page}><p>Aktivitet ikke fundet.</p></main>
 
-  const weekday = formatWeekday(activity.weekday)
-  const time = activity.time || ""
-  const ageText = activity.minAge || activity.maxAge
-    ? `${activity.minAge ?? ""}-${activity.maxAge ?? ""}`
-    : ""
+  const ageText = activity.minAge ? `${activity.minAge}+ år` : ""
 
   return (
     <main className={styles.page}>
-      {activity.asset?.url && (
-        <img src={activity.asset.url} alt={activity.name} className={styles.image} />
-      )}
-      <h1 className={styles.title}>{activity.name}</h1>
-      <p className={styles.meta}>
-        {weekday}{weekday && time ? " kl. " : ""}{time}
-      </p>
-      {ageText && <p className={styles.meta}>Alder: {ageText}</p>}
-      {activity.description && <p className={styles.meta}>{activity.description}</p>}
-
-      {me && (
-        <div className={styles.actions}>
+      <div className={styles.imageWrapper}>
+        {activity.asset?.url && (
+          <img src={activity.asset.url} alt={activity.name} className={styles.image} />
+        )}
+        {me && (
           <button
             className={styles.btn}
             type="button"
@@ -96,14 +84,25 @@ export default function ActivityDetailsPage() {
           >
             {joined ? "Forlad" : "Tilmeld"}
           </button>
+        )}
+      </div>
 
-          {!joined && !joinCheck.ok && joinCheck.reason && (
-            <p className={styles.message}>{joinCheck.reason}</p>
-          )}
+      <div className={styles.content}>
+        <h1 className={styles.title}>{activity.name}</h1>
+        {ageText && <p className={styles.meta}>{ageText}</p>}
+        <p className={styles.description}>
+          {activity.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget elementum lorem nulla vitae felis auctor pretium suspendisse et. Condimentum fringilla odio vitae interdum adipiscing odio volutpat. Faucibus gravida quis nisi, purus morbi leo nulla a. Mattis tincidunt phasellus enim, egestas non ultrices."}
+        </p>
 
-          {message && <p className={styles.message}>{message}</p>}
-        </div>
-      )}
+        {me && (
+          <>
+            {!joined && !joinCheck.ok && joinCheck.reason && (
+              <p className={styles.message}>{joinCheck.reason}</p>
+            )}
+            {message && <p className={styles.message}>{message}</p>}
+          </>
+        )}
+      </div>
     </main>
   )
 }

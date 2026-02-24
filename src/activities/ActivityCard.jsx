@@ -1,12 +1,9 @@
 import Link from "next/link"
-import { formatWeekday } from "@/lib/weekday"
 import styles from "./ActivityCard.module.scss"
 
 export default function ActivityCard({ activity }) {
-  const weekday = formatWeekday(activity.weekday)
-  const time = activity.time || ""
-  const instructor = activity.instructor
-    ? `${activity.instructor.firstname} ${activity.instructor.lastname}`
+  const ageText = activity.minAge || activity.maxAge
+    ? `${activity.minAge ?? ""}–${activity.maxAge ?? ""} år`
     : ""
 
   return (
@@ -17,10 +14,7 @@ export default function ActivityCard({ activity }) {
         )}
         <div className={styles.info}>
           <h2 className={styles.name}>{activity.name}</h2>
-          <p className={styles.meta}>
-            {weekday}{weekday && time ? " kl. " : ""}{time}
-          </p>
-          {instructor && <p className={styles.instructor}>{instructor}</p>}
+          {ageText && <p className={styles.meta}>{ageText}</p>}
         </div>
       </article>
     </Link>

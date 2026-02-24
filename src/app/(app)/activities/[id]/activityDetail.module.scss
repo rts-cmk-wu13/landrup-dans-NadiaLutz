@@ -1,54 +1,75 @@
 @use "../../../../styles/_tokens" as *;
 
 .page {
-  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: $color-bg;
+  padding-bottom: 7rem;
+}
+
+.imageWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 25rem;
+  width: auto;
 }
 
 .image {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 240px;
+  height: 100%;
   object-fit: cover;
-  display: block;
-}
-
-.title {
-  padding: 1rem 1rem 0;
-  margin: 0 0 0.5rem;
-  color: $color-text;
-}
-
-.meta {
-  padding: 0 1rem;
-  margin: 0 0 0.25rem;
-  color: $color-text;
-  opacity: 0.8;
-}
-
-.actions {
-  padding: 0 1rem;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.75rem;
 }
 
 .btn {
-  padding: 0.75rem 1.75rem;
+  margin-top: auto;
+  margin-inline: auto 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+  padding: 0.75rem 4.5rem;
   border: 0;
   border-radius: 0.5rem;
   background: $color-btn;
   color: $color-text-light;
   font-size: 1rem;
-  cursor: pointer;
+  white-space: nowrap;
+}
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+.content {
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.title {
+  margin: 0;
+  color: $color-text-light;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.meta {
+  margin: 0;
+  color: $color-text-light;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.description {
+  margin: 0.5rem 0 0;
+  color: $color-text-light;
+  opacity: 0.8;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .message {
-  margin: 0;
-  color: $color-text;
+  margin: 0.5rem 0 0;
+  color: $color-text-light;
+  opacity: 0.8;
 }

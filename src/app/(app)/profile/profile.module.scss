@@ -1,16 +1,18 @@
 @use "../../../styles/_tokens" as *;
 
-.page {
-  padding: 1rem;
+.profilePage {
+  min-height: 100dvh;
+  background: $color-bg;
   padding-bottom: 5rem;
 }
 
 .notLoggedIn {
-  color: $color-text;
+  padding: 1rem;
+  color: $color-text-light;
 }
 
 .logoutBtn {
-  margin: 1rem 0;
+  margin: 1rem;
   padding: 0.5rem 1.25rem;
   border: 0;
   border-radius: 0.5rem;

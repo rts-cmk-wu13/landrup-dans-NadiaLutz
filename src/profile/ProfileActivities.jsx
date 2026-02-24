@@ -7,7 +7,7 @@ export default function ProfileActivities({ title, activities = [], variant }) {
     <section className={styles.section}>
       <h2 className={styles.title}>{title}</h2>
 
-      {activities.length === 0 && <p>Ingen aktiviteter tilgængelige.</p>}
+      {activities.length === 0 && <p className={styles.empty}>Ingen aktiviteter tilgængelige.</p>}
 
       {activities.length > 0 && (
         <div className={styles.container}>

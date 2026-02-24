@@ -5,8 +5,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: $color-bg;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #fff;
   z-index: 100;
 }
 
@@ -24,10 +23,9 @@
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  color: $color-text-light;
+  color: $color-text;
   text-decoration: none;
-  font-size: 0.7rem;
-  opacity: 0.7;
+  font-size: 0.75rem;
 }
 
 .nav li a:hover,
@@ -36,5 +34,5 @@
 }
 
 .icon {
-  font-size: 1.4rem;
+  font-size: 1rem;
 }

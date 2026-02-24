@@ -36,7 +36,7 @@ export default function ActivitiesPage() {
     : items
 
   return (
-    <main className={styles.page}>
+    <main className={styles.activitiesPage}>
       <header className={styles.header}>
         {!searchOpen && <h1 className={styles.title}>Aktiviteter</h1>}
         <SearchBar
@@ -45,7 +45,6 @@ export default function ActivitiesPage() {
           open={searchOpen}
           onOpen={() => setSearchOpen(true)}
           onClose={() => { setSearchOpen(false); setQuery("") }}
-          placeholder="Søg på titel, ugedag eller instruktør"
         />
       </header>
 

@@ -1,0 +1,85 @@
+@use "../../../../../styles/_tokens" as *;
+
+.formPage {
+  min-height: 100dvh;
+  background: $color-bg;
+  padding: 1.5rem 1rem 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0 0 1.5rem;
+  color: $color-text-light;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: $color-text-light;
+  font-size: 0.9rem;
+}
+
+.input,
+.textarea {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: $color-text-light;
+  font-size: 1rem;
+  outline: none;
+
+  &:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  option {
+    background: $color-bg;
+    color: $color-text-light;
+  }
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+
+  .label {
+    flex: 1;
+  }
+}
+
+.error {
+  margin: 0;
+  color: #ff7070;
+  font-size: 0.9rem;
+}
+
+.btn {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: $color-btn;
+  color: $color-text-light;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

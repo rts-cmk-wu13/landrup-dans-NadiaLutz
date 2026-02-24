@@ -6,6 +6,7 @@ import { ldFetch } from "@/lib/api"
 import { getMe } from "@/lib/auth"
 import ProfileHeader from "@/profile/ProfileHeader"
 import ProfileActivities from "@/profile/ProfileActivities"
+import InstructorActivities from "@/profile/InstructorActivities"
 import { getUserActivities } from "@/lib/rules"
 import styles from "./profile.module.scss"
 
@@ -34,11 +35,11 @@ export default function ProfilePage() {
     load()
   }, [])
 
-  if (loading) return <main className={styles.page}><p>Indlæser...</p></main>
+  if (loading) return <main className={styles.profilePage}><p>Indlæser...</p></main>
 
   if (!me) {
     return (
-      <main className={styles.page}>
+      <main className={styles.profilePage}>
         <p>Du er ikke logget ind.</p>
         <Link href="/login">Gå til login</Link>
       </main>
@@ -51,12 +52,12 @@ export default function ProfilePage() {
     : getUserActivities(me)
 
   return (
-    <main className={styles.page}>
+    <main className={styles.profilePage}>
       <ProfileHeader user={me} />
       {!isInstructor ? (
         <ProfileActivities title="Tilmeldte hold" activities={myActivities} variant="default" />
       ) : (
-        <ProfileActivities title="Mine aktiviteter" activities={myActivities} variant="instructor" />
+        <InstructorActivities activities={myActivities} />
       )}
     </main>
   )
