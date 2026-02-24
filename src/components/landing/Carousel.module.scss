@@ -1,21 +1,31 @@
 @use "../../styles/_tokens.scss" as *;
 
+.carouselSection {
+  background: rgba(7, 7, 70, 0.247);
+  margin-block-start: 3rem;
+  padding-block-start: 1rem;
+}
+
 .carousel {
   font-family: "Ubuntu", sans-serif;
-  background: $color-bg;
   color: $color-text-light;
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+ margin-inline: auto;
   text-align: center;
+  color: $color-text-light;
+  margin-block: 1.5rem;
+  max-width: 12rem;
+  align-self: center;
 }
 
 .controls {
@@ -25,7 +35,7 @@
 
 .controlBtn {
   border: 2px solid $color-btn-light;
-  background: $color-bg;
+  background: rgba(7, 7, 70, 0.247);
   font-size: 2rem;
   border-radius: 50%;
   background: $color-btn;
@@ -41,7 +51,7 @@
 }
 
 .stateText {
-  font-size: 0.9rem;
+  font-size: 1rem;
   opacity: 0.95;
   text-align: center;
 }
@@ -63,15 +73,16 @@
 }
 
 .text {
-  margin: 0 0 1.25rem;
-  line-height: 1.6;
-  font-size: 0.95rem;
+  margin: 0 2.5rem 1.5rem;
+  line-height: 1.4;
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 .name {
   margin: 0;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 .occupation {

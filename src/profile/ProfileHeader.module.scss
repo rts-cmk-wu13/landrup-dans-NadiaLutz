@@ -1,0 +1,24 @@
+@use "../styles/_tokens" as *;
+
+.header {
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  margin: 0 0 0.25rem;
+  color: $color-text;
+}
+
+.name {
+  margin: 0;
+  color: $color-text;
+  font-weight: 500;
+}
+
+.role {
+  margin: 0;
+  color: $color-text;
+  opacity: 0.65;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}

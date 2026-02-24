@@ -66,6 +66,8 @@ export default function Carousel() {
   }
 
   return (
+    <section className={styles.carouselSection}>
+    <h1 className={styles.title}>Det siger vores kunder om os</h1>
     <div className={styles.carousel}>
       {status.type === "loading" && (
         <p className={styles.stateText}>Henter anmeldelser...</p>
@@ -86,6 +88,7 @@ export default function Carousel() {
             </div>
           ))}
         </div>
+      
       )}
 
       <div className={styles.controls}>
@@ -97,5 +100,6 @@ export default function Carousel() {
         </button>
       </div>
     </div>
+      </section>
   )
 }

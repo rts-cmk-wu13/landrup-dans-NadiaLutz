@@ -52,7 +52,7 @@ export default function LoginForm({ className, showRememberMe = false }) {
         type="text"
         id="username"
         name="username"
-        placeholder="Username"
+        placeholder="Brugernavn"
         value={values.username}
         onChange={(e) => setField("username", e.target.value)}
         autoComplete="username"
@@ -63,7 +63,7 @@ export default function LoginForm({ className, showRememberMe = false }) {
         type="password"
         id="password"
         name="password"
-        placeholder="Password"
+        placeholder="Adgangskode"
         value={values.password}
         onChange={(e) => setField("password", e.target.value)}
         autoComplete="current-password"
@@ -77,12 +77,12 @@ export default function LoginForm({ className, showRememberMe = false }) {
             checked={values.rememberMe}
             onChange={(e) => setField("rememberMe", e.target.checked)}
           />
-          Remember me
+          Husk mig
         </label>
       ) : null}
 
       <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Logging in..." : "Log in"}
+        {isSubmitting ? "Logger ind..." : "Log ind"}
       </button>
 
       {status.type !== "idle" ? (

@@ -9,10 +9,13 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding: 4rem 1rem 1rem;
+  padding: 4rem 1.75rem 1rem;
 
   .holdTypeTitle {
-    font-size: 1.5rem;
+    font-size: 2.25rem;
+    font-weight: 400;
+    align-self: flex-start;
+    margin-block-end: 1rem;
   }
 
   .holdType {
@@ -24,8 +27,9 @@
     text-align: left;
 
     .holdTypeSubtitle {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
         font-weight: 400;
+        margin-block-end: 0.5rem;
     }
 
     .holdTypeImg {
@@ -36,8 +40,10 @@
     }
 
     .holdTypeText {
-      font-size: 0.9rem;
-        line-height: 1.4;
+      font-size: 1.15rem;
+        line-height: 1.2;
+        font-weight: 300;
+        margin-block-start: 0.5rem;
     }
    }
 

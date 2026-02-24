@@ -73,7 +73,7 @@ export default function RegisterForm({ className }) {
     <form className={className} onSubmit={onSubmit} noValidate>
       <input
         type="text"
-        placeholder="First name"
+        placeholder="Fornavn"
         id="firstname"
         name="firstname"
         value={values.firstname}
@@ -83,7 +83,7 @@ export default function RegisterForm({ className }) {
       />
       <input
         type="text"
-        placeholder="Last name"
+        placeholder="Efternavn"
         id="lastname"
         name="lastname"
         value={values.lastname}
@@ -93,7 +93,7 @@ export default function RegisterForm({ className }) {
       />
       <input
         type="text"
-        placeholder="Username"
+        placeholder="Brugernavn"
         id="username"
         name="username"
         value={values.username}
@@ -103,7 +103,7 @@ export default function RegisterForm({ className }) {
       />
       <input
         type="number"
-        placeholder="Age"
+        placeholder="Alder"
         id="age"
         name="age"
         value={values.age}
@@ -113,7 +113,7 @@ export default function RegisterForm({ className }) {
       />
       <input
         type="password"
-        placeholder="Password"
+        placeholder="Adgangskode"
         id="password"
         name="password"
         value={values.password}
@@ -123,7 +123,7 @@ export default function RegisterForm({ className }) {
       />
       <input
         type="password"
-        placeholder="Confirm password"
+        placeholder="Gentag adgangskode"
         id="confirmPassword"
         name="confirmPassword"
         value={values.confirmPassword}
@@ -133,7 +133,7 @@ export default function RegisterForm({ className }) {
       />
 
       <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Creating..." : "Create account"}
+        {isSubmitting ? "Logger ind..." : "Log ind"}
       </button>
 
       {status.type !== "idle" ? (

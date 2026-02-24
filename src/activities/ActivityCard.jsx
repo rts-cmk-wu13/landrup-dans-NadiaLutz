@@ -1,37 +1,28 @@
-
-import Link from "next/link";
-import { formatWeekday } from "@/lib/weekday";
-import styles from "./ActivityCard.module.scss";
-
-function getInstructorName(activity) {
-  const i = activity?.instructor;
-  const first = i?.firstname || i?.firstName || activity?.instructorFirstname;
-  const last = i?.lastname || i?.lastName || activity?.instructorLastname;
-  const full = [first, last].filter(Boolean).join(" ").trim();
-  return full || activity?.instructorName || activity?.instructor || activity?.teacher || "";
-}
+import Link from "next/link"
+import { formatWeekday } from "@/lib/weekday"
+import styles from "./ActivityCard.module.scss"
 
 export default function ActivityCard({ activity }) {
-  const id = activity?.id;
-  const name = activity?.name || "Untitled activity";
-  const weekday = formatWeekday(activity?.weekday);
-  const time = activity?.time || "";
-  const instructor = getInstructorName(activity);
+  const weekday = formatWeekday(activity.weekday)
+  const time = activity.time || ""
+  const instructor = activity.instructor
+    ? `${activity.instructor.firstname} ${activity.instructor.lastname}`
+    : ""
 
   return (
-    <Link href={`/activities/${encodeURIComponent(id)}`} className={styles.link}>
+    <Link href={`/activities/${activity.id}`} className={styles.link}>
       <article className={styles.card}>
-        {activity?.Asset?.url && (
-          <img src={activity.Asset.url} alt={name} className={styles.image} />
+        {activity.asset?.url && (
+          <img src={activity.asset.url} alt={activity.name} className={styles.image} />
         )}
         <div className={styles.info}>
-          <h2 className={styles.name}>{name}</h2>
+          <h2 className={styles.name}>{activity.name}</h2>
           <p className={styles.meta}>
-            {weekday}{weekday && time ? " · " : ""}{time}
+            {weekday}{weekday && time ? " kl. " : ""}{time}
           </p>
-          {instructor ? <p className={styles.instructor}>{instructor}</p> : null}
+          {instructor && <p className={styles.instructor}>{instructor}</p>}
         </div>
       </article>
     </Link>
-  );
+  )
 }
