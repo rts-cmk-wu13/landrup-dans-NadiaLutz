@@ -35,11 +35,11 @@ export default function ProfilePage() {
     load()
   }, [])
 
-  if (loading) return <main className={styles.profilePage}><p>Indlæser...</p></main>
+  if (loading) return <main className={styles.profilePageCentered}><p>Indlæser...</p></main>
 
   if (!me) {
     return (
-      <main className={styles.profilePage}>
+      <main className={styles.profilePageCentered}>
         <p>Du er ikke logget ind.</p>
         <Link href="/login">Gå til login</Link>
       </main>
@@ -48,7 +48,11 @@ export default function ProfilePage() {
 
   const isInstructor = me.role === "instructor"
   const myActivities = isInstructor
-    ? activities.filter(a => String(a.instructor?.id) === String(me.id))
+    ? activities.filter(a =>
+        String(a.instructor?.id) === String(me.id) ||
+        String(a.instructor?.userId) === String(me.id) ||
+        String(a.instructorId) === String(me.id)
+      )
     : getUserActivities(me)
 
   return (

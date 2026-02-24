@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { FiSearch, FiX } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import styles from "./SearchBar.module.scss";
 
-export default function SearchBar({ value, onChange, open, onOpen, onClose, placeholder = "Søg..." }) {
+export default function SearchBar({ value, onChange, open, onOpen, onClose, placeholder = "" }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -30,10 +30,10 @@ export default function SearchBar({ value, onChange, open, onOpen, onClose, plac
         autoComplete="off"
         aria-label="Søg"
         className={styles.input}
+        onBlur={onClose}
+        onKeyDown={(e) => e.key === "Escape" && onClose?.()}
       />
-      <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Luk søgning">
-        <FiX />
-      </button>
+      <FiSearch className={styles.inputIcon} />
     </div>
   );
 }

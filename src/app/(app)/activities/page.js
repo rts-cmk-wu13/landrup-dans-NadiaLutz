@@ -37,8 +37,7 @@ export default function ActivitiesPage() {
 
   return (
     <main className={styles.activitiesPage}>
-      <header className={styles.header}>
-        {!searchOpen && <h1 className={styles.title}>Aktiviteter</h1>}
+      <div className={styles.topBar}>
         <SearchBar
           value={query}
           onChange={setQuery}
@@ -46,7 +45,8 @@ export default function ActivitiesPage() {
           onOpen={() => setSearchOpen(true)}
           onClose={() => { setSearchOpen(false); setQuery("") }}
         />
-      </header>
+      </div>
+      <h1 className={styles.title}>Aktiviteter</h1>
 
       {loading && <p>Indlæser...</p>}
 

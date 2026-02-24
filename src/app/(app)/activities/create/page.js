@@ -156,10 +156,12 @@ export default function CreateActivityPage() {
             className={styles.hiddenFile}
             onChange={e => setImageFile(e.target.files?.[0] ?? null)}
           />
-          <button type="button" className={styles.fileBtn} onClick={() => fileRef.current?.click()}>
-            Gennemse...
-          </button>
-          <span className={styles.fileName}>{imageFile?.name ?? "Ingen fil valgt"}</span>
+          <div className={styles.fileInputRow}>
+            <button type="button" className={styles.fileBtn} onClick={() => fileRef.current?.click()}>
+              Gennemse...
+            </button>
+            <span className={styles.fileName}>{imageFile?.name ?? "Ingen fil valgt"}</span>
+          </div>
         </div>
 
         {error && <p className={styles.error}>{error}</p>}

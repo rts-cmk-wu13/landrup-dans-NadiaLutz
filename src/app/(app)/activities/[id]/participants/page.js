@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
+import { FaUser } from "react-icons/fa6"
 import { ldFetch } from "@/lib/api"
 import { getMe } from "@/lib/auth"
+import ProfileHeader from "@/profile/ProfileHeader"
 import styles from "./participants.module.scss"
 
 export default function ParticipantsPage() {
@@ -11,6 +13,7 @@ export default function ParticipantsPage() {
   const router = useRouter()
 
   const [loading, setLoading] = useState(true)
+  const [me, setMe] = useState(null)
   const [participants, setParticipants] = useState([])
   const [activityName, setActivityName] = useState("")
 
@@ -28,6 +31,8 @@ export default function ParticipantsPage() {
         return
       }
 
+      setMe(user)
+
       const actRes = await ldFetch(`/api/v1/activities/${id}`, { method: "GET" })
       if (actRes.ok) setActivityName(actRes.data?.name || "")
 
@@ -43,20 +48,25 @@ export default function ParticipantsPage() {
 
   return (
     <main className={styles.page}>
-      <h1 className={styles.title}>Deltagerliste</h1>
-      <p className={styles.activityName}>{activityName}</p>
+      <ProfileHeader user={me} />
 
-      {participants.length === 0 ? (
-        <p className={styles.empty}>Ingen deltagere tilmeldt denne aktivitet.</p>
-      ) : (
-        <ul className={styles.list}>
-          {participants.map((u, i) => (
-            <li key={i} className={styles.listItem}>
-              {u.firstname} {u.lastname}
-            </li>
-          ))}
-        </ul>
-      )}
+      <section className={styles.section}>
+        <h2 className={styles.activityName}>{activityName}</h2>
+        <p className={styles.delegatesLabel}>Deltagere:</p>
+
+        {participants.length === 0 ? (
+          <p className={styles.empty}>Ingen deltagere tilmeldt denne aktivitet.</p>
+        ) : (
+          <ul className={styles.list}>
+            {participants.map((u, i) => (
+              <li key={i} className={styles.listItem}>
+                <FaUser className={styles.icon} />
+                <span className={styles.name}>{u.firstname} {u.lastname}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </main>
   )
 }

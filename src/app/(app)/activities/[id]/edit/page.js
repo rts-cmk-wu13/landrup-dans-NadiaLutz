@@ -46,7 +46,7 @@ export default function EditActivityPage() {
 
     setSubmitting(true)
     const res = await ldFetch(`/api/v1/activities/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       body: {
         name: form.name,
         weekday: form.weekday || undefined,

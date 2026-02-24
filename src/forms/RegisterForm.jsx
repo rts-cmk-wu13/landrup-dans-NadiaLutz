@@ -133,7 +133,7 @@ export default function RegisterForm({ className }) {
       />
 
       <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Logger ind..." : "Log ind"}
+        {isSubmitting ? "Opretter..." : "Opret bruger"}
       </button>
 
       {status.type !== "idle" ? (

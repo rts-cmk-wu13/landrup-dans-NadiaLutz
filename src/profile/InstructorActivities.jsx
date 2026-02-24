@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { FiEdit2, FiTrash2 } from "react-icons/fi"
+import { FiEdit, FiTrash2 } from "react-icons/fi"
+import { AiOutlineDelete } from "react-icons/ai";
 import { ldFetch } from "@/lib/api"
 import { formatWeekday } from "@/lib/weekday"
 import styles from "./InstructorActivities.module.scss"
@@ -61,7 +62,7 @@ export default function InstructorActivities({ activities: initial = [] }) {
                 </Link>
                 <div className={styles.iconBtns}>
                   <Link href={`/activities/${a.id}/edit`} className={styles.iconBtn}>
-                    <FiEdit2 />
+                    <FiEdit />
                   </Link>
                   <button
                     type="button"
@@ -69,7 +70,7 @@ export default function InstructorActivities({ activities: initial = [] }) {
                     onClick={() => handleDelete(a.id)}
                     disabled={deleting === a.id}
                   >
-                    <FiTrash2 />
+                  <AiOutlineDelete />
                   </button>
                 </div>
               </div>
