@@ -1,93 +1,45 @@
+"use client"
 
-"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { login } from "@/lib/auth";
-import { validateLogin } from "@/lib/validators";
+import { useActionState } from "react"
+import { loginAction } from "@/app/(public)/login/actions"
 
 export default function LoginForm({ className, showRememberMe = false }) {
-  const router = useRouter();
-
-  const [values, setValues] = useState({
-    username: "",
-    password: "",
-    rememberMe: false,
-  });
-
-  const [status, setStatus] = useState({ type: "idle", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  function setField(key, val) {
-    setValues((v) => ({ ...v, [key]: val }));
-  }
-
-  async function onSubmit(e) {
-    e.preventDefault();
-    setStatus({ type: "idle", message: "" });
-
-    const v = validateLogin(values);
-    const firstError = v.errors.username || v.errors.password;
-    if (firstError) {
-      setStatus({ type: "error", message: firstError });
-      return;
-    }
-
-    setIsSubmitting(true);
-    const res = await login(v.values);
-    setIsSubmitting(false);
-
-    if (!res.ok) {
-      const msg = res.data?.error || res.data?.message || "Login failed. Please try again.";
-      setStatus({ type: "error", message: msg });
-      return;
-    }
-
-    router.push("/activities");
-  }
+  const [state, action, isPending] = useActionState(loginAction, null)
 
   return (
-    <form className={className} onSubmit={onSubmit} noValidate>
+    <form className={className} action={action} noValidate>
       <input
         type="text"
-        id="username"
         name="username"
         placeholder="Brugernavn"
-        value={values.username}
-        onChange={(e) => setField("username", e.target.value)}
         autoComplete="username"
-        required
       />
+      {state?.errors?.username && (
+        <p role="alert">{state.errors.username[0]}</p>
+      )}
 
       <input
         type="password"
-        id="password"
         name="password"
         placeholder="Adgangskode"
-        value={values.password}
-        onChange={(e) => setField("password", e.target.value)}
         autoComplete="current-password"
-        required
       />
+      {state?.errors?.password && (
+        <p role="alert">{state.errors.password[0]}</p>
+      )}
 
       {showRememberMe ? (
         <label>
-          <input
-            type="checkbox"
-            checked={values.rememberMe}
-            onChange={(e) => setField("rememberMe", e.target.checked)}
-          />
+          <input type="checkbox" name="rememberMe" />
           Husk mig
         </label>
       ) : null}
 
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Logger ind..." : "Log ind"}
+      <button type="submit" disabled={isPending}>
+        {isPending ? "Logger ind..." : "Log ind"}
       </button>
 
-      {status.type !== "idle" ? (
-        <p role={status.type === "error" ? "alert" : undefined}>{status.message}</p>
-      ) : null}
+      {state?.error ? <p role="alert">{state.error}</p> : null}
     </form>
-  );
+  )
 }

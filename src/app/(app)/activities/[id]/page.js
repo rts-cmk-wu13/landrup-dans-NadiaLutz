@@ -44,7 +44,7 @@ export default function ActivityDetailsPage() {
     if (res.ok) {
       const meRes = await getMe()
       if (meRes.ok) setMe(meRes.data)
-      setMessage("Du er nu tilmeldt aktiviteten.")
+      setMessage("tilmeldt")
     } else {
       setMessage("Noget gik galt. Prøv igen.")
     }
@@ -57,7 +57,7 @@ export default function ActivityDetailsPage() {
     if (res.ok) {
       const meRes = await getMe()
       if (meRes.ok) setMe(meRes.data)
-      setMessage("Du er nu afmeldt aktiviteten.")
+      setMessage("afmeldt")
     } else {
       setMessage("Noget gik galt. Prøv igen.")
     }
@@ -97,9 +97,13 @@ export default function ActivityDetailsPage() {
         {me && (
           <>
             {!joined && !joinCheck.ok && joinCheck.reason && (
-              <p className={styles.message}>{joinCheck.reason}</p>
+              <p className={styles.error}>{joinCheck.reason}</p>
             )}
-            {message && <p className={styles.message}>{message}</p>}
+            {message && (
+              <p className={styles.activityMessage}>
+                Du er nu <span className={styles.activityMessageBold}>{message}</span> aktiviteten.
+              </p>
+            )}
           </>
         )}
       </div>

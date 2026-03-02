@@ -1,144 +1,78 @@
+"use client"
 
-"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { ldFetch } from "@/lib/api";
-import { validateRegister } from "@/lib/validators";
+import { useActionState } from "react"
+import { registerAction } from "@/app/(public)/register/actions"
 
 export default function RegisterForm({ className }) {
-  const router = useRouter();
-
-  const [values, setValues] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    age: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [status, setStatus] = useState({ type: "idle", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  function setField(key, val) {
-    setValues((v) => ({ ...v, [key]: val }));
-  }
-
-  async function onSubmit(e) {
-    e.preventDefault();
-    setStatus({ type: "idle", message: "" });
-
-    const v = validateRegister(values);
-    const firstError =
-      v.errors.firstname ||
-      v.errors.lastname ||
-      v.errors.username ||
-      v.errors.age ||
-      v.errors.password ||
-      v.errors.confirmPassword;
-
-    if (firstError) {
-      setStatus({ type: "error", message: firstError });
-      return;
-    }
-
-
-    const form = new URLSearchParams();
-    form.set("username", v.values.username);
-    form.set("password", v.values.password);
-    form.set("firstname", v.values.firstname);
-    form.set("lastname", v.values.lastname);
-    form.set("age", String(v.values.age));
-    form.set("role", "default");
-
-    setIsSubmitting(true);
-    const res = await ldFetch("/api/v1/users", {
-      method: "POST",
-      body: form,
-    });
-    setIsSubmitting(false);
-
-    if (!res.ok) {
-      const msg = res.data?.error || res.data?.message || "Registration failed. Please try again.";
-      setStatus({ type: "error", message: msg });
-      return;
-    }
-
-    setStatus({ type: "success", message: "Account created. You can now log in." });
-    router.push("/login");
-  }
+  const [state, action, isPending] = useActionState(registerAction, null)
 
   return (
-    <form className={className} onSubmit={onSubmit} noValidate>
+    <form className={className} action={action} noValidate>
       <input
         type="text"
-        placeholder="Fornavn"
-        id="firstname"
         name="firstname"
-        value={values.firstname}
-        onChange={(e) => setField("firstname", e.target.value)}
+        placeholder="Fornavn"
         autoComplete="given-name"
-        required
       />
+      {state?.errors?.firstname && (
+        <p role="alert">{state.errors.firstname[0]}</p>
+      )}
+
       <input
         type="text"
-        placeholder="Efternavn"
-        id="lastname"
         name="lastname"
-        value={values.lastname}
-        onChange={(e) => setField("lastname", e.target.value)}
+        placeholder="Efternavn"
         autoComplete="family-name"
-        required
       />
+      {state?.errors?.lastname && (
+        <p role="alert">{state.errors.lastname[0]}</p>
+      )}
+
       <input
         type="text"
-        placeholder="Brugernavn"
-        id="username"
         name="username"
-        value={values.username}
-        onChange={(e) => setField("username", e.target.value)}
+        placeholder="Brugernavn"
         autoComplete="username"
-        required
       />
+      {state?.errors?.username && (
+        <p role="alert">{state.errors.username[0]}</p>
+      )}
+
       <input
         type="number"
-        placeholder="Alder"
-        id="age"
         name="age"
-        value={values.age}
-        onChange={(e) => setField("age", e.target.value)}
+        placeholder="Alder"
         inputMode="numeric"
-        required
       />
-      <input
-        type="password"
-        placeholder="Adgangskode"
-        id="password"
-        name="password"
-        value={values.password}
-        onChange={(e) => setField("password", e.target.value)}
-        autoComplete="new-password"
-        required
-      />
-      <input
-        type="password"
-        placeholder="Gentag adgangskode"
-        id="confirmPassword"
-        name="confirmPassword"
-        value={values.confirmPassword}
-        onChange={(e) => setField("confirmPassword", e.target.value)}
-        autoComplete="new-password"
-        required
-      />
+      {state?.errors?.age && (
+        <p role="alert">{state.errors.age[0]}</p>
+      )}
 
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Opretter..." : "Opret bruger"}
+      <input
+        type="password"
+        name="password"
+        placeholder="Adgangskode"
+        autoComplete="new-password"
+      />
+      {state?.errors?.password && (
+        <p role="alert">{state.errors.password[0]}</p>
+      )}
+
+      <input
+        type="password"
+        name="confirmPassword"
+        placeholder="Gentag adgangskode"
+        autoComplete="new-password"
+      />
+      {state?.errors?.confirmPassword && (
+        <p role="alert">{state.errors.confirmPassword[0]}</p>
+      )}
+
+      <button type="submit" disabled={isPending}>
+        {isPending ? "Opretter..." : "Opret bruger"}
       </button>
 
-      {status.type !== "idle" ? (
-        <p role={status.type === "error" ? "alert" : undefined}>{status.message}</p>
-      ) : null}
+      {state?.error ? <p role="alert">{state.error}</p> : null}
     </form>
-  );
+  )
 }

@@ -21,7 +21,6 @@ export async function ldFetch(path, options = {}) {
 
   let body = options.body;
 
-
   if (
     body &&
     typeof body === "object" &&

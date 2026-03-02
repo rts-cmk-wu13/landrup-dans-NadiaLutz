@@ -51,5 +51,10 @@ margin-block-start: 2rem;
   border-radius: 0.5rem;
   background: $color-btn-light;
   color: $color-text;
+}
 
+.registerForm [role="alert"] {
+  margin: 0;
+  color: #ff7070;
+  font-size: 0.875rem;
 }

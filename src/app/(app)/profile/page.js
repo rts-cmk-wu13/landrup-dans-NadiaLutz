@@ -55,13 +55,17 @@ export default function ProfilePage() {
       )
     : getUserActivities(me)
 
+  function handleDeleteActivity(id) {
+    setActivities(prev => prev.filter(a => a.id !== id))
+  }
+
   return (
     <main className={styles.profilePage}>
       <ProfileHeader user={me} />
       {!isInstructor ? (
         <ProfileActivities title="Tilmeldte hold" activities={myActivities} variant="default" />
       ) : (
-        <InstructorActivities activities={myActivities} />
+        <InstructorActivities activities={myActivities} onDelete={handleDeleteActivity} />
       )}
     </main>
   )

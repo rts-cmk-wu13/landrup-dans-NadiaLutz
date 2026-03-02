@@ -61,6 +61,11 @@ async function forward(request, { params }) {
     cache: "no-store",
   });
 
+  // 204/205/304 are null-body statuses — passing any body throws a TypeError
+  if (res.status === 204 || res.status === 205 || res.status === 304) {
+    return new Response(null, { status: res.status });
+  }
+
   const outType = res.headers.get("content-type") || "application/json";
   const text = await res.text().catch(() => "");
 

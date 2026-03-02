@@ -8,9 +8,11 @@ import { ldFetch } from "@/lib/api"
 import { formatWeekday } from "@/lib/weekday"
 import styles from "./InstructorActivities.module.scss"
 
-export default function InstructorActivities({ activities: initial = [] }) {
-  const [activities, setActivities] = useState(initial)
+export default function InstructorActivities({ activities = [], onDelete }) {
   const [deleting, setDeleting] = useState(null)
+  const [deletedIds, setDeletedIds] = useState(new Set())
+
+  const visible = activities.filter(a => !deletedIds.has(String(a.id)))
 
   async function handleDelete(id) {
     if (!confirm("Vil du slette denne aktivitet?")) return
@@ -18,7 +20,8 @@ export default function InstructorActivities({ activities: initial = [] }) {
     const res = await ldFetch(`/api/v1/activities/${id}`, { method: "DELETE" })
     setDeleting(null)
     if (res.ok) {
-      setActivities(prev => prev.filter(a => a.id !== id))
+      setDeletedIds(prev => new Set([...prev, String(id)]))
+      onDelete?.(id)
     }
   }
 
@@ -29,12 +32,12 @@ export default function InstructorActivities({ activities: initial = [] }) {
         <Link href="/activities/create" className={styles.addBtn}>+</Link>
       </div>
 
-      {activities.length === 0 && (
+      {visible.length === 0 && (
         <p className={styles.empty}>Ingen aktiviteter tilgængelige.</p>
       )}
 
       <div className={styles.container}>
-        {activities.map(a => {
+        {visible.map(a => {
           const weekday = formatWeekday(a.weekday)
           const time = a.time || ""
           const enrolled = a.participants?.length ?? 0

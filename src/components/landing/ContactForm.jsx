@@ -1,60 +1,68 @@
+"use client"
+
+import { useActionState } from "react"
+import { contactAction } from "@/app/(public)/actions"
 import styles from "./ContactForm.module.scss"
 
 export default function ContactForm() {
-  return (
-    <>
+  const [state, action, isPending] = useActionState(contactAction, null)
+
+  if (state?.success) {
+    return (
       <section className={styles.contactForm}>
         <div className={styles.contactInner}>
           <h1 className={styles.contactTitle}>Kontakt os</h1>
-
-          <form className={styles.contactFormContainer}>
-            <input
-              className={styles.contactInput}
-              placeholder="Navn"
-              type="text"
-              id="name"
-              name="name"
-              autoComplete="name"
-              required
-            />
-
-            <input
-              className={styles.contactInput}
-              placeholder="Email"
-              type="email"
-              id="email"
-              name="email"
-              autoComplete="email"
-              required
-            />
-
-            <textarea
-              className={styles.contactTextarea}
-              placeholder="Besked"
-              id="message"
-              name="message"
-              rows={8}
-              required
-            />
-
-            <button className={styles.contactButton} type="submit">
-              Send besked
-            </button>
-          </form>
+          <p className={styles.contactMessage}>Tak for din besked! Vi vender tilbage hurtigst muligt.</p>
         </div>
       </section>
+    )
+  }
 
-      <section className={styles.contactInfo}>
-        <img className={styles.brand} src="/imgs/brand.png" alt="Logo" />
-      <span className={styles.brandName}>Landrup Dans</span>
+  return (
+    <section className={styles.contactForm}>
+      <div className={styles.contactInner}>
+        <h1 className={styles.contactTitle}>Kontakt os</h1>
 
-        <div className={styles.infoDivider}>
-        <p className={styles.contactInfoText}>
-          Pulsen 8, 4000 Roskilde
-        </p>
-        <p className={styles.contactInfoText}>Tlf. 3540 4550</p>
-        </div>
-      </section>
-    </>
+        <form className={styles.contactFormContainer} action={action} noValidate>
+          <input
+            className={styles.contactInput}
+            placeholder="Navn"
+            type="text"
+            name="name"
+            autoComplete="name"
+          />
+          {state?.errors?.name && (
+            <p role="alert" className={styles.error}>{state.errors.name[0]}</p>
+          )}
+
+          <input
+            className={styles.contactInput}
+            placeholder="Email"
+            type="email"
+            name="email"
+            autoComplete="email"
+          />
+          {state?.errors?.email && (
+            <p role="alert" className={styles.error}>{state.errors.email[0]}</p>
+          )}
+
+          <textarea
+            className={styles.contactTextarea}
+            placeholder="Besked"
+            name="message"
+            rows={8}
+          />
+          {state?.errors?.message && (
+            <p role="alert" className={styles.error}>{state.errors.message[0]}</p>
+          )}
+
+          {state?.error && <p role="alert" className={styles.error}>{state.error}</p>}
+
+          <button className={styles.contactButton} type="submit" disabled={isPending}>
+            {isPending ? "Sender..." : "Send besked"}
+          </button>
+        </form>
+      </div>
+    </section>
   )
 }
