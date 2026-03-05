@@ -58,8 +58,8 @@ export default function ParticipantsPage() {
           <p className={styles.empty}>Ingen deltagere tilmeldt denne aktivitet.</p>
         ) : (
           <ul className={styles.list}>
-            {participants.map((u, i) => (
-              <li key={i} className={styles.listItem}>
+            {participants.map((u) => (
+              <li key={u.id} className={styles.listItem}>
                 <FaUser className={styles.icon} />
                 <span className={styles.name}>{u.firstname} {u.lastname}</span>
               </li>

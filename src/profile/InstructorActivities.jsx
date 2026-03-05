@@ -2,17 +2,14 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { FiEdit, FiTrash2 } from "react-icons/fi"
-import { AiOutlineDelete } from "react-icons/ai";
+import { FiEdit } from "react-icons/fi"
+import { AiOutlineDelete } from "react-icons/ai"
 import { ldFetch } from "@/lib/api"
 import { formatWeekday } from "@/lib/weekday"
 import styles from "./InstructorActivities.module.scss"
 
 export default function InstructorActivities({ activities = [], onDelete }) {
   const [deleting, setDeleting] = useState(null)
-  const [deletedIds, setDeletedIds] = useState(new Set())
-
-  const visible = activities.filter(a => !deletedIds.has(String(a.id)))
 
   async function handleDelete(id) {
     if (!confirm("Vil du slette denne aktivitet?")) return
@@ -20,7 +17,6 @@ export default function InstructorActivities({ activities = [], onDelete }) {
     const res = await ldFetch(`/api/v1/activities/${id}`, { method: "DELETE" })
     setDeleting(null)
     if (res.ok) {
-      setDeletedIds(prev => new Set([...prev, String(id)]))
       onDelete?.(id)
     }
   }
@@ -32,15 +28,15 @@ export default function InstructorActivities({ activities = [], onDelete }) {
         <Link href="/activities/create" className={styles.addBtn}>+</Link>
       </div>
 
-      {visible.length === 0 && (
+      {activities.length === 0 && (
         <p className={styles.empty}>Ingen aktiviteter tilgængelige.</p>
       )}
 
       <div className={styles.container}>
-        {visible.map(a => {
+        {activities.map(a => {
           const weekday = formatWeekday(a.weekday)
           const time = a.time || ""
-          const enrolled = a.participants?.length ?? 0
+          const enrolled = a.users?.length || 0
 
           return (
             <article key={a.id} className={styles.card}>

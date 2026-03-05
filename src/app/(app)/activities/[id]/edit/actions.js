@@ -25,12 +25,12 @@ export async function editActivityAction(id, prevState, formData) {
 
   const fd = new FormData()
   fd.append("name", name)
-  if (description !== undefined) fd.append("description", description)
-  if (weekday !== undefined) fd.append("weekday", weekday)
-  if (time !== undefined) fd.append("time", time)
-  if (minAge !== undefined) fd.append("minAge", String(minAge))
-  if (maxAge !== undefined) fd.append("maxAge", String(maxAge))
-  if (maxParticipants !== undefined) fd.append("maxParticipants", String(maxParticipants))
+  if (description != null) fd.append("description", description)
+  if (weekday != null) fd.append("weekday", weekday)
+  if (time != null) fd.append("time", time)
+  if (minAge != null) fd.append("minAge", String(minAge))
+  if (maxAge != null) fd.append("maxAge", String(maxAge))
+  if (maxParticipants != null) fd.append("maxParticipants", String(maxParticipants))
 
   const cookieStore = await cookies()
   const token = cookieStore.get("ld_token")?.value || ""

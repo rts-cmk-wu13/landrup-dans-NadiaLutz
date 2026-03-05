@@ -29,9 +29,9 @@ export async function createActivityAction(prevState, formData) {
 
   const fd = new FormData()
   fd.append("name", name)
-  if (description) fd.append("description", description)
-  if (weekday) fd.append("weekday", weekday)
-  if (time) fd.append("time", time)
+  if (description != null) fd.append("description", description)
+  if (weekday != null) fd.append("weekday", weekday)
+  if (time != null) fd.append("time", time)
   if (minAge != null) fd.append("minAge", String(minAge))
   if (maxAge != null) fd.append("maxAge", String(maxAge))
   if (maxParticipants != null) fd.append("maxParticipants", String(maxParticipants))

@@ -2,7 +2,7 @@ import styles from "./HoldTyper.module.scss";
 
 
 export default function HoldTyper() {
-  return <section className={styles.holdTyper}>
+  return <section id="vores-holdtyper" className={styles.holdTyper}>
     
   <h1 className={styles.holdTypeTitle}>Vores holdtyper</h1>
 

@@ -27,7 +27,15 @@ export default function ProfilePage() {
 
       if (meRes.data.role === "instructor") {
         const allActs = await ldFetch("/api/v1/activities", { method: "GET" })
-        if (allActs.ok) setActivities(allActs.data)
+        if (allActs.ok) {
+          const userId = String(meRes.data.id)
+          const mine = allActs.data.filter(a =>
+            String(a.instructor?.id) === userId ||
+            String(a.instructor?.userId) === userId ||
+            String(a.instructorId) === userId
+          )
+          setActivities(mine)
+        }
       }
 
       setLoading(false)
@@ -47,13 +55,7 @@ export default function ProfilePage() {
   }
 
   const isInstructor = me.role === "instructor"
-  const myActivities = isInstructor
-    ? activities.filter(a =>
-        String(a.instructor?.id) === String(me.id) ||
-        String(a.instructor?.userId) === String(me.id) ||
-        String(a.instructorId) === String(me.id)
-      )
-    : getUserActivities(me)
+  const myActivities = isInstructor ? activities : getUserActivities(me)
 
   function handleDeleteActivity(id) {
     setActivities(prev => prev.filter(a => a.id !== id))

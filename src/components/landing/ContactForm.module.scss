@@ -4,7 +4,7 @@
   font-family: "Ubuntu", sans-serif;
   background: $color-bg;
   color: $color-text-light;
-  padding: 2.25rem 1rem 2rem;
+  padding: 2.25rem 2rem 2rem;
 }
 
 .contactInner {
@@ -27,12 +27,17 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
+  gap: 1.45rem;
 }
 .contactInput {
   padding: 0.75rem;
   border-radius: 0.1rem;
   border: none;
+
+  &::placeholder {
+    font-size: 1.25rem;
+    opacity: 0.7;
+  }
 }
 
 .contactTextarea {
@@ -41,14 +46,21 @@
   border: none;
   resize: none;
   font-family: "Ubuntu", sans-serif;
+
+  &::placeholder {
+    font-size: 1.25rem;
+    opacity: 0.7;
+  }
 }
 
 .contactButton {
   background-color: $color-btn-light;
   color: $color-text;
+  font-size: 1.25rem;
+  font-weight: 600;
   border: none;
   border-radius: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.5rem;
   box-shadow: 0 4px 1px rgba(0, 0, 0, 0.226);
   min-width: 65%;
   align-self: center;
@@ -58,7 +70,7 @@
 
 .error {
   margin: 0;
-  color: #ff7070;
+  color: $color-error;
   font-size: 0.875rem;
 }
 
@@ -69,7 +81,7 @@
       font-size: 1.25rem;
       font-style: italic;
       color: $color-text-light;
-      border: 1px solid lightblue;
+      border: 1px solid $color-message;
       border-radius: 0.3rem;
       padding: 1rem;
       text-align: center;
@@ -82,18 +94,27 @@
   flex-direction: column;
   gap: .5rem;
   align-items: center;
-  padding-block-start: 2rem;
+  margin-block: 2rem;
+
+
 
     .brand {
-        width: 3rem;
+        width: 4rem;
     }
 
     .brandName {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
+        font-weight: 600;
     }
 
     .infoDivider {
      padding-block: 1rem 4rem;
      text-align: center;
     }
+}
+
+.contactInfoText {
+
+  font-size: 1.15rem;
+  font-weight: 600;
 }

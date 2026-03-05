@@ -31,7 +31,7 @@ export default function InstructorCalendarPage() {
 
       const allActs = await ldFetch("/api/v1/activities", { method: "GET" })
       if (allActs.ok) {
-        const mine = allActs.data.filter(a => String(a.instructor?.id) === String(user.id))
+        const mine = allActs.data.filter(a => String(a.instructorId) === String(user.id))
         setActivities(mine)
       }
 

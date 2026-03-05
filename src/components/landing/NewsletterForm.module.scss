@@ -58,14 +58,14 @@
       font-size: 1.25rem;
       font-style: italic;
       color: $color-text-light;
-      border: 1px solid lightblue;
+      border: 1px solid $color-message;
       padding: 1rem;
       text-align: center;
     }
 
   .error {
     margin: 0;
-    color: #ff7070;
+    color: $color-error;
     font-size: 0.875rem;
     align-self: flex-start;
   }

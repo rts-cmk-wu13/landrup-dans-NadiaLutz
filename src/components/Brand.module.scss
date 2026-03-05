@@ -23,6 +23,24 @@
  width: var(--title-width);
 }
 
+.brandLarge {
+  --title-width: 18rem;
+
+  .brandLogo {
+    width: 4.5rem;
+    margin-block: 2rem;
+  }
+
+  .brandName {
+    height: 4.5rem;
+  }
+
+  .heroDivider {
+    height: 4px;
+    margin-top: 0.5rem;
+  }
+}
+
 .heroDivider {
   align-self: flex-start;
   width: calc(50% + (var(--title-width) / 2));

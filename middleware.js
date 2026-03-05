@@ -18,7 +18,7 @@ function decodeJwtExpMs(token) {
 export function middleware(request) {
   const { pathname } = request.nextUrl;
 
-  // Public routes
+
   if (pathname === "/" || pathname.startsWith("/login") || pathname.startsWith("/register")) {
     return NextResponse.next();
   }

@@ -7,6 +7,11 @@ import { getMe } from "@/lib/auth"
 import { canJoinActivity, isUserJoinedActivity } from "@/lib/rules"
 import styles from "./activityDetail.module.scss"
 
+async function fetchActivity(id) {
+  const actRes = await ldFetch(`/api/v1/activities/${id}`, { method: "GET" })
+  return actRes.ok ? actRes.data : null
+}
+
 export default function ActivityDetailsPage() {
   const { id } = useParams()
 
@@ -18,8 +23,8 @@ export default function ActivityDetailsPage() {
 
   useEffect(() => {
     async function load() {
-      const actRes = await ldFetch(`/api/v1/activities/${id}`, { method: "GET" })
-      if (actRes.ok) setActivity(actRes.data)
+      const actData = await fetchActivity(id)
+      if (actData) setActivity(actData)
 
       const meRes = await getMe()
       if (meRes.ok) setMe(meRes.data)
@@ -42,6 +47,8 @@ export default function ActivityDetailsPage() {
     const res = await ldFetch(`/api/v1/users/${me.id}/activities/${activity.id}`, { method: "POST" })
     setIsSubmitting(false)
     if (res.ok) {
+      const actData = await fetchActivity(id)
+      if (actData) setActivity(actData)
       const meRes = await getMe()
       if (meRes.ok) setMe(meRes.data)
       setMessage("tilmeldt")
@@ -55,6 +62,8 @@ export default function ActivityDetailsPage() {
     const res = await ldFetch(`/api/v1/users/${me.id}/activities/${activity.id}`, { method: "DELETE" })
     setIsSubmitting(false)
     if (res.ok) {
+      const actData = await fetchActivity(id)
+      if (actData) setActivity(actData)
       const meRes = await getMe()
       if (meRes.ok) setMe(meRes.data)
       setMessage("afmeldt")

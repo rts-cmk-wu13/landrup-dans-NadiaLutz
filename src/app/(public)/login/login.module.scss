@@ -33,14 +33,14 @@
   width: 100%;
   padding: .6rem .65rem;
   border-radius: 0.1rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid $color-border-input;
   background-color: $color-btn-light;
   font-size: 1rem;
   outline: none;
 }
 
 .loginForm input:focus {
-  border-color: rgba(255, 255, 255, 0.38);
+  border-color: $color-border-focus;
 }
 
 .loginForm button {
@@ -60,7 +60,7 @@ margin-top: 0.25rem;
 
 .loginForm [role="alert"] {
   margin: 0;
-  color: #ff7070;
+  color: $color-error;
   font-size: 0.875rem;
 }
 

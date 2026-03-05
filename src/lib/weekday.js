@@ -1,5 +1,5 @@
 
-const MAP = {
+const weekdays = {
   mandag: "Mandag",
   tirsdag: "Tirsdag",
   onsdag: "Onsdag",
@@ -7,9 +7,10 @@ const MAP = {
   fredag: "Fredag",
   lørdag: "Lørdag",
   søndag: "Søndag",
-};
+}
 
 export function formatWeekday(value) {
-  const key = String(value || "").trim().toLowerCase();
-  return MAP[key] || (key ? key[0].toUpperCase() + key.slice(1) : "");
+  if (!value) return ""
+  const key = value.trim().toLowerCase()
+  return weekdays[key] || value
 }

@@ -33,14 +33,14 @@ margin-block-start: 2rem;
   width: 100%;
   padding: .6rem .65rem;
   border-radius: 0.1rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid $color-border-input;
   background-color: $color-btn-light;
   font-size: 1rem;
   outline: none;
 }
 
 .registerForm input:focus {
-  border-color: rgba(255, 255, 255, 0.38);
+  border-color: $color-border-focus;
 }
 
 .registerForm button {
@@ -48,6 +48,7 @@ margin-block-start: 2rem;
   width: 75%;
   align-self: center;
   padding: 0.9rem 0.95rem;
+  border: 0;
   border-radius: 0.5rem;
   background: $color-btn-light;
   color: $color-text;
@@ -55,6 +56,6 @@ margin-block-start: 2rem;
 
 .registerForm [role="alert"] {
   margin: 0;
-  color: #ff7070;
+  color: $color-error;
   font-size: 0.875rem;
 }
